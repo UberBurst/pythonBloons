@@ -10,8 +10,9 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 from PIL import Image
 from scipy import ndimage, signal, misc
-
+##Section for generating the track points
 trackPoints = [[0,0]]
+##Display an image of the track, then draw a collection of points across the track
 def onClick(event):
         if event.button is MouseButton.LEFT:
             print("click")
@@ -33,7 +34,9 @@ print(trackPoints)
 
 
 #Lv = [[1,0],[1,1],[1,2],[1,3],[2,3],[3,3]]
-MonkeyRange = 150
+#The range of the monkey, weights for the track allignment and the track coverage
+#accordingly
+MonkeyRange = 300
 alpha = .5
 beta = .5
 h,w,c = img.shape
@@ -72,7 +75,8 @@ monkPosVal = np.array([[0]*xStep for i in range(yStep)])
 point = 0
 xIts = 0
 
-
+##Calcualte the dot product of the monkey's aiming vector and also how many track pieces are in the
+## the monkey's range
 for monkeyX in np.arange(0,xRange,hStep):
     yIts = 0
     for monkeyY in np.arange(0,yRange,hStep):
@@ -124,7 +128,7 @@ print(Z)
 #surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1,
  #                      linewidth=0, antialiased=False)
 #ax.set_zlim(-1,1)
-
+#draw the values over the map itself
 cmap = plt.cm.coolwarm
 my_cmap = cmap(np.arange(cmap.N))
 
